@@ -84,7 +84,7 @@ The request prefix `31 01 A1 9A` is a UDS RoutineControl startRoutine request fo
 
 **Interpretation:** `PERSONALISATION_CREATE_LOCAL_ACCOUNT` is passed as the argument string to the MGU's `steuern_routine` job. It is not itself the UDS routine identifier. The UDS routine identifier observed on the wire is `A1 9A`.
 
-**Response body:** the trace includes an ASCII-like payload beginning with bytes `64 65 2E 62 61 69 6E 6D 65 6E 74 2E ...`, but the supplied dump is truncated/partially garbled. Do not infer the full returned string or treat it as a success flag until the complete 63-byte payload is captured and decoded.
+**Response body (partially reconstructed from the byte fragments supplied):** the ASCII bytes decode to `de.bmw.infotainment.personal` (`64 65 2E 62 6D 77 2E 69 6E 66 6F 74 61 69 6E 6D 65 6E 74 2E 70 65 72 73 6F 6E 61 6C`). This looks like a component/package identifier associated with BMW Personalisation. It is not, by itself, a documented account-created result or success discriminator. The diagnostic display fragments were supplied across separate messages and the complete 63-byte response has not yet been independently verified byte-for-byte; retain this as a decoded text fragment, not as the full response payload.
 
 **Important distinction:** `JOBSTATUS = OKAY` and a UDS positive response establish that the diagnostic job/routine request was accepted/executed at the diagnostic layer. They do not, by themselves, prove that a new local driver profile was persisted or activated.
 
